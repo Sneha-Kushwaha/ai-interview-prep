@@ -17,11 +17,7 @@ connectDB();
 // 2) call/invoke the function
 let app = express(); // object = {listen}
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  }),
-);
+app.use(cors());
 
 app.use(express.urlencoded({ extended:true}));
 app.use(express.json());
@@ -31,7 +27,9 @@ app.use("/api/auth", userRoutes); // http://localhost:9001/api/auth/signup
 app.use("/api/sessions", sessionRoutes);
 
 // 3) assign a port number to our server
-app.listen(9001, () => {
+const PORT = process.env.PORT || 9001;
+
+app.listen(PORT, () => {
   console.log("Server Started.....");
 });
 // app.listen(PORT_NUMBER, callback)
